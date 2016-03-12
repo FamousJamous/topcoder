@@ -149,11 +149,11 @@ class VectVar(Var):
 def str_to_var(string):
   if is_string(string):
     return StrVar(string)
-  elif is_int(string):
+  if is_int(string):
     return IntVar(int(string))
-  elif is_float(string):
+  if is_float(string):
     return FloatVar(float(string))
-  elif is_vect(string):
+  if is_vect(string):
     val = []
     for sub_str in string[1:len(string) - 1].split(","):
       sub_str = sub_str.strip()
@@ -422,7 +422,7 @@ def gen_b(test_name):
   bat = open("b.bat", "w")
   bat.write("bcc32 -etest %s.cpp\n" %(test_name))
 
-def gen_cpp(test_name):
+def gen_main(test_name):
   cpp = open(test_name + ".cpp", "w")
   tests = Tests(test_name + ".in")
   write_header(cpp, tests)
@@ -435,7 +435,7 @@ def main():
   test_name = sys.argv[1]
   gen_t(test_name)
   gen_b(test_name)
-  gen_cpp(test_name)
+  gen_main(test_name)
 
 if __name__ == "__main__":
   main()
