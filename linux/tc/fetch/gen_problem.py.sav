@@ -1,0 +1,121 @@
+#!/usr/bin/python
+import re
+
+def match_field(name, line):
+  res = re.search(r"%s:\t(.*)" %(name), line)
+  if res:
+    return res.groups()[0]
+
+class IntType():
+  def __str__(self):
+    return "int"
+
+class StringType():
+  def __str__(self):
+    return "string"
+
+class VectorType():
+  def __init__(self, type_str):
+    self._type = parse_type(type_str)
+
+  def __str__(self):
+    return "vector<%s>" %(self._type)
+
+def parse_type(type_str):
+  if type_str.endswith("[]"):
+    return VectorType(type_str[:len(type_str) - 2])
+  if "int" == type_str:
+    return IntType()
+  if "String" == type_str:
+    return StringType()
+
+class Param():
+  def __init__(self, type_str, name):
+    self._type = parse_type(type_str)
+    self._name = name
+
+  def __str__(self):
+    return "%s %s" %(self._type, self._name)
+
+def parse_param(param_str):
+  [ type_str, name ] = param_str.split(" ")
+  return Param(type_str, name)
+
+def parse_params(params_str):
+  params = []
+  for param_str in params_str.split(", "):
+    params.append(parse_param(param_str))
+  return params
+
+class Signature():
+  def __init__(self, returns_str, name, params_str):
+    self._returns = parse_type(returns_str)
+    self._name = name
+    self._params = parse_params(params_str)
+
+  def __str__(self):
+    return "%s %s(%s)" %(self._returns, self._name, ", ".join([str(param) for param in self._params]))
+    
+def parse_signature(signature_str):
+  res = re.search("(\S+) (\S+)\((.*)\)", signature_str)
+  [ returns_str, name, params_str ] = res.groups()
+  return Signature(returns_str, name, params_str)
+
+STATE_GET_CLASS = 0
+STATE_GET_METHOD = 1
+STATE_GET_PARAMETERS = 2
+STATE_GET_RETURNS = 3
+STATE_GET_METHOD_SIGNATURE = 4
+STATE_GET_EXAMPLES = 5
+
+class FileParser():
+  def __init__(self, formatted):
+    self._state = STATE_GET_CLASS
+    for line in formatted:
+      self._parse_line(line)
+    print "class: " + self._class
+    print "method: " + self._method
+    print "parameters: " + self._parameters
+    print "returns: " + self._returns
+    print "method_signature: " + self._method_signature
+
+  def _parse_line(self, line):
+    if STATE_GET_CLASS == self._state:
+      self._get_class(line)
+    elif STATE_GET_METHOD == self._state:
+      self._get_method(line)
+    elif STATE_GET_PARAMETERS == self._state:
+      self._get_parameters(line)
+    elif STATE_GET_RETURNS == self._state:
+      self._get_returns(line)
+    elif STATE_GET_METHOD_SIGNATURE == self._state:
+      self._get_method_signature(line)
+
+  def _get_class(self, line):
+    self._class = match_field("Class", line)
+    if self._class:
+      self._state = STATE_GET_METHOD 
+    
+  def _get_method(self, line):
+      self._method = match_field("Method", line)
+      if self._method:
+        self._state = STATE_GET_PARAMETERS 
+
+  def _get_parameters(self, line):
+      self._parameters = match_field("Parameters", line)
+      if self._parameters:
+        self._state = STATE_GET_RETURNS 
+
+  def _get_returns(self, line):
+      self._returns = match_field("Returns", line)
+      if self._returns:
+        self._state = STATE_GET_METHOD_SIGNATURE 
+
+  def _get_method_signature(self, line):
+      self._method_signature = match_field("Method signature", line)
+      if self._method_signature:
+        print parse_signature(self._method_signature)
+        self._state = STATE_GET_EXAMPLES
+
+def gen_problem(level_dir, formatted_file_name):
+  file_parser = FileParser(open(formatted_file_name))
