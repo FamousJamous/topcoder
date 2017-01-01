@@ -7,11 +7,11 @@ SUB_TAB = re.compile("<td ?[a-zA-Z0-9=\" ]*>")
 SUB_CLEAR = re.compile("</[a-z0-9]*>|&#[0-9]*;|<b>|<td>|<table>|<pre>")
 SUB_NEWLINE = re.compile("<[a-z0-9]* ?[a-zA-Z0-9=\" ]*>")
 
-def format_problem(url, srm_num, div, level):
+def format_problem(url, data_dir, srm_num, div, level):
   cached_file_name = "srm%d.d%d.l%d" %(srm_num, div, level)
-  formatted_file_name = "data/" + cached_file_name + ".formatted"
+  formatted_file_name = "%s/%s.formatted" %(data_dir, cached_file_name)
   formatted_file = open(formatted_file_name, "w")
-  for line in get_html_cached(url, cached_file_name):
+  for line in get_html_cached(url, data_dir, cached_file_name):
     line = SUB_QUOTE.sub("\"", line)
     line = SUB_TAB.sub("\t", line)
     line = SUB_CLEAR.sub("", line)
@@ -20,7 +20,7 @@ def format_problem(url, srm_num, div, level):
     if "All rights reserved." in line:
       return formatted_file_name
 
-def format_problems(srm_num, problem_urls):
+def format_problems(srm_num, data_dir, problem_urls):
   file_names = []
   for div, urls in problem_urls.iteritems():
     print "div %d" %(div)
@@ -28,5 +28,5 @@ def format_problems(srm_num, problem_urls):
       print "level %d %s" %(level, url)
       if not url:
         continue
-      file_names.append(format_problem(url, srm_num, div, level))
+      file_names.append(format_problem(url, data_dir, srm_num, div, level))
   return file_names

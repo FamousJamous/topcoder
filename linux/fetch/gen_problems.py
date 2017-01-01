@@ -7,8 +7,8 @@ def mkdir(name):
     return
   os.mkdir(name)
 
-def gen_problems(srm_num, formatted_file_names, urls):
-  srm_dir = "../../srm%d" %(srm_num)
+def gen_problems(srm_num, formatted_file_names, urls, dest_dir):
+  srm_dir = "%s/srm%d" %(dest_dir, srm_num)
   mkdir(srm_dir)
   div = 1
   level = 1
