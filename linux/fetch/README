@@ -5,3 +5,5 @@ ln -s ~/src/topcoder/linux/fetch/fetch.sh ~/bin/tc
 
 usage:
 tc <srm num>
+
+This creates code stubs for all problems for <srm num> in the current directory.
