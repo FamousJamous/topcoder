@@ -1,7 +1,7 @@
 my setup:
 ~/data/topcoder - cached fetched pages
-~/src/topcoder/fetch - copy of all these files there
-ln -s ~/src/topcoder/fetch/fetch.sh ~/bin/tc
+~/src/topcoder/linux/fetch - all these files there
+ln -s ~/src/topcoder/linux/fetch/fetch.sh ~/bin/tc
 
 usage:
 tc <srm num>
