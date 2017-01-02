@@ -1,4 +1,6 @@
 #!/usr/bin/python
+from gen_sh import gen_sh
+from gen_url import gen_url
 import datetime
 import os
 import re
@@ -324,10 +326,6 @@ class FileParser():
       "}",
     ]))
 
-def gen_sh(path, lines):
-  open(path, "w").write("\n".join(lines))
-  os.chmod(path, 0x755)
-
 def gen_test(path):
   gen_sh(path + "/test.sh", [
     "#!/bin/bash",
@@ -346,13 +344,6 @@ def gen_run(path):
   gen_sh(path + "/run.sh", [
     "#!/bin/bash",
     "./a.out",
-  ])
-
-def gen_url(path, url):
-  gen_sh(path + "/url.sh", [
-    "#!/bin/bash",
-    "echo \"" + url + "\"",
-    "firefox --new-tab \"" + url + "\"&",
   ])
 
 def already_generated(path):

@@ -1,15 +1,9 @@
 #!/usr/bin/python
 import os
 from gen_problem import gen_problem
+from mkdir import mkdir
 
-def mkdir(name):
-  if os.path.isdir(name):
-    return
-  os.mkdir(name)
-
-def gen_problems(srm_num, formatted_file_names, urls, dest_dir):
-  srm_dir = "%s/srm%d" %(dest_dir, srm_num)
-  mkdir(srm_dir)
+def gen_problems(srm_num, formatted_file_names, urls, srm_dir):
   div = 1
   level = 1
   div_dir = "%s/d%d" %(srm_dir, div)
