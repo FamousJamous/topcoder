@@ -352,7 +352,7 @@ def gen_url(path, url):
   gen_sh(path + "/url.sh", [
     "#!/bin/bash",
     "echo \"" + url + "\"",
-    "firefox --new-window \"" + url + "\"",
+    "firefox --new-tab \"" + url + "\"&",
   ])
 
 def already_generated(path):
