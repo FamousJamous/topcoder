@@ -14,6 +14,14 @@ class IntType():
   def __str__(self):
     return "int"
 
+class DoubleType():
+  def __str__(self):
+    return "double"
+
+class LongType():
+  def __str__(self):
+    return "long"
+
 class StringType():
   def __str__(self):
     return "string"
@@ -30,6 +38,10 @@ def parse_type(type_str):
     return VectorType(type_str[:len(type_str) - 2])
   if "int" == type_str:
     return IntType()
+  if "double" == type_str:
+    return DoubleType()
+  if "long" == type_str:
+    return LongType()
   if "String" == type_str:
     return StringType()
 
@@ -177,14 +189,19 @@ def gen_res(_class, signature):
   func = signature.get_name()
   inputs = gen_pass_inputs(signature, "")
   return "  %s res = %s().%s(%s);" %(ret_type, _class, func, inputs)
-  
+
+def gen_assert(signature):
+  if "double" == signature.get_returns().__str__():
+    return "assert(abs(exp - res) < 1e-9);"
+  return "assert(exp == res)"
 
 def gen_test_func(_class, signature):
   return "\n".join([
     "%s {" %(gen_test_func_sig(signature)),
     "%s" %(gen_res(_class, signature)),
-    "  cout << \"exp \" << exp << \" res \" << res << endl;",
-    "  assert(exp == res);",
+    "  cout << \"exp \" << exp << endl;",
+    "  cout << \" res \" << res << endl;",
+    "  %s" %(gen_assert(signature)),
     "}",
   ])
 
