@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from gen_sh import gen_sh
-from gen_url import gen_url
 import datetime
 import os
 import re
@@ -86,20 +85,48 @@ class Signature():
 
   def get_params(self):
     return self._params
+
+def is_vect(t):
+  return t.__str__().startswith("vector")
     
 def parse_signature(signature_str):
   res = re.search("(\S+) (\S+)\((.*)\)", signature_str)
   [ returns_str, name, params_str ] = res.groups()
   return Signature(returns_str, name, params_str)
 
+EX_GET_INPUTS = 0
+EX_GET_OUTPUT = 1
+
 class Example():
   def __init__(self, ex_lines, signature):
     self._inputs = []
+    params = signature.get_params()
+    pi = 0
+    vect_str = ""
+    state = EX_GET_INPUTS
     for line in ex_lines:
+      line = line.strip()
       if line.startswith("Returns:"):
-        self._output = line[len("Returns:"):].strip()
+        state = EX_GET_OUTPUT
+        line = line[len("Returns:"):].strip()
+      if EX_GET_INPUTS == state:
+        print line
+        if is_vect(params[pi]):
+          vect_str += line
+          if line.endswith("}"):
+            self._inputs.append(vect_str)
+            vect_str = ""
+            pi += 1
+        else:
+          self._inputs.append(line)
+          pi +=1
       else:
-        self._inputs.append(line.strip())
+        if is_vect(signature.get_returns()):
+          vect_str += line
+          if line.endswith("}"):
+            self._output = vect_str[len("Returns: "):]
+        else:
+          self._output = line[len("Returns: "):]
 
   def __str__(self):
     return "inputs: %s, output: %s" %(", ".join(self._inputs), self._output)
@@ -193,7 +220,7 @@ def gen_res(_class, signature):
 def gen_assert(signature):
   if "double" == signature.get_returns().__str__():
     return "assert(abs(exp - res) < 1e-9);"
-  return "assert(exp == res)"
+  return "assert(exp == res);"
 
 def gen_test_func(_class, signature):
   return "\n".join([
@@ -366,14 +393,13 @@ def gen_run(path):
 def already_generated(path):
   return os.path.isfile(path + "/test.sh")
 
-def gen_problem(path, formatted_file_name, url):
+def gen_problem(path, formatted_file_name):
   if already_generated(path):
     print "already generated " + path
     return 1
   gen_test(path)
   gen_build(path)
   gen_run(path)
-  gen_url(path, url)
   file_parser = FileParser(open(formatted_file_name))
   file_parser.gen_h(path)
   file_parser.gen_cpp(path)

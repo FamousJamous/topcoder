@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os
 from gen_problem import gen_problem
+from gen_url import gen_url
 from mkdir import mkdir
 
 def gen_problems(srm_num, formatted_file_names, urls, srm_dir):
@@ -11,7 +12,8 @@ def gen_problems(srm_num, formatted_file_names, urls, srm_dir):
     mkdir(div_dir)
     level_dir = "%s/l%d" %(div_dir, level)
     mkdir(level_dir)
-    gen_problem(level_dir, formatted_file_name, urls[div][level])
+    gen_problem(level_dir, formatted_file_name)
+    gen_url(level_dir, urls[div][level])
     level += 1
     if 4 == level:
       div += 1

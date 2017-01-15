@@ -1,0 +1,784 @@
+
+
+
+
+
+
+ 
+
+   
+TopCoder Statistics - Problem Statement</TITLE>
+   
+
+
+<base href="//community.topcoder.com/">
+
+   
+
+
+
+
+
+<script type="text/javascript" src="/js/reskin/jquery-1.11.0.min.js">
+<script type="text/javascript" src="/js/reskin/jquery-migrate-1.2.1.js">
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/js/reskin/html5shiv.js">
+<![endif]-->
+<script type="text/javascript" src="/js/reskin/jquery.jfeed.pack.js">
+<script type="text/javascript" src="/js/reskin/newTCScript.js">
+
+
+<script type="text/javascript">var _kmq = _kmq || [];
+  var _kmk = _kmk || 'aa23cd43c455ef33b6a0df3de81a79af9ea30f75';
+  function _kms(u){
+    setTimeout(function(){
+      var d = document, f = d.getElementsByTagName('script')[0],
+      s = d.createElement('script');
+      s.type = 'text/javascript'; s.async = true; s.src = u;
+      f.parentNode.insertBefore(s, f);
+    }, 1);
+  }
+  _kms('//i.kissmetrics.com/i.js');
+  _kms('//scripts.kissmetrics.com/' + _kmk + '.2.js');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'/>
+    
+    <link type="text/css" rel="stylesheet" href="/css/coders.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jobsRemix.css" />
+    <link type="text/css" rel="stylesheet" href="/css/reskin/myHome.css" />
+    
+<link type="text/css" rel="stylesheet" href="/css/reskin/newStyles.css"/>
+<!--[if IE 8]>
+<link type="text/css" rel="stylesheet" href="/css/reskin/newStyles_ie8.css"/>
+<![endif]-->
+
+
+
+<style type="text/css">
+a:link {color: white}
+a:visited {color: white}
+
+
+ </HEAD>
+ <body text="#FFFFFF">
+   
+
+
+
+
+
+
+
+
+
+
+    $(document).ready(function(){
+        $("a.new-btn-login").attr('href', $("a.new-btn-login").attr('href') + "?next=" + window.location.href);
+    })
+
+
+
+    
+
+        <!-- new theme -->
+
+        <div class="header-wrapper">
+            <!-- Main header element-->
+            <header class="top-header new-topcoder-header">
+                <!-- Header content visible on small screens-->
+                <div class="show-small mobile-heading"><span class="tc-text-logo">[ topcoder ]
+                    <button type="button" class="btn-open-menu">Menu
+                    <button type="button" class="btn-close-menu">
+
+                    
+                        <a href="https://www.topcoder.com/register/" class="user-link">
+                            <span class="btn-link join-link">JOIN
+                        
+                    
+
+
+
+                
+                <!-- main menu -->
+                <ul class="main-menu">
+                    <!-- search container-->
+                    <li class="menu-item search-wrapper">
+                        <div class="menu-item-header search-header show-large">
+                            <button type="button" class="btn-expand-search search-icon">
+                        
+                        
+
+                            <form action="https://www.topcoder.com/search/members/" method="get">
+                                <input type="text" id="searchBox" style="font-size: 12px"  placeholder="FIND MEMBERS BY USERNAME OR SKILL" name="q">
+                                <input type="submit"
+                                       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+                                       tabindex="-1" />
+                             
+                            <!-- Suggestion list container-->
+                            <ul class="suggestion-list">
+                        
+                    
+
+
+
+                    
+                        <!-- for anonymous user-->
+                        <li class="menu-item link-group user-menu anonymous-menu"><!-- links for logged in user-->
+
+                            <div class="menu-item-header anonymous-options">
+                                <a class="btn-link" href="https://www.topcoder.com/register/">REGISTER
+                                <a class="btn-link secondary-link btn-login new-btn-login" href="https://www.topcoder.com/login/">LOG IN
+                            
+                        
+
+                    
+
+                    <li class="menu-item link-group">
+                        <div class="menu-item-header">COMPETE
+                        
+
+                            <li class="submenu-item"><a href="https://www.topcoder.com/challenges/design/active" class="menu-link menu-link-design">DESIGN CHALLENGES
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/challenges/develop/active" class="menu-link menu-link-dev">DEVELOPMENT CHALLENGES
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/challenges/data/active" class="menu-link menu-link-data">DATA SCIENCE CHALLENGES
+                            
+                            <li class="submenu-item"><a href="https://arena.topcoder.com" class="menu-link menu-link-arena">COMPETITIVE PROGRAMMING
+                            
+                        
+                    
+
+                    <!-- 'LEARN' link group-->
+                    <li class="menu-item link-group">
+                        <div class="menu-item-header">LEARN
+                        
+
+                            <li class="submenu-item"><a href="https://www.topcoder.com/member-onboarding/" class="menu-link menu-link-learn-started">GET STARTED
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/design/" class="menu-link menu-link-learn-design">DESIGN
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/development/" class="menu-link menu-link-learn-dev">DEVELOPMENT
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/data-science/" class="menu-link menu-link-learn-data">DATA SCIENCE
+                            
+                            <li class="submenu-item"><a href="http://www.topcoder.com/community/competitive%20programming/" class="menu-link menu-link-learn-competition">COMPETITIVE PROGRAMMING
+                            
+
+                        
+                    
+                    <!-- 'COMMUNITY' link group-->
+                    <li class="menu-item link-group">
+                        <div class="menu-item-header">COMMUNITY
+                        
+
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/members/" class="menu-link menu-link-community-members">OVERVIEW
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/tco" class="menu-link menu-link-community-tco17">TCO
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/member-programs/" class="menu-link menu-link-community-programs">PROGRAMS
+                            
+                            <li class="submenu-item"><a href="https://apps.topcoder.com/forums/" class="menu-link menu-link-community-forums" target="_blank">FORUMS
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/statistics/" class="menu-link menu-link-community-stats">STATISTICS
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/events/" class="menu-link menu-link-community-events">EVENTS
+                            
+                            <li class="submenu-item"><a href="https://www.topcoder.com/blog/" class="menu-link menu-link-community-blog">BLOG
+                            
+                        
+                    
+                
+            
+        
+    
+    
+
+
+
+
+   <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+     
+
+       
+
+         
+
+
+
+
+
+
+
+    
+        
+            
+            
+        
+
+
+
+
+
+
+<div style="width: 185px;" class="leftNavWrapper">
+    
+<input type="hidden" id="nodeName" value="algo_problem_archive"/>
+<script language="JavaScript" type="text/javascript" src="/js/arena.js">
+
+    <section class="get-time" style="margin-bottom:15px">
+        
+        
+
+        <a href="javascript:tcTime();">Get Time
+    
+    <!-- End .get-time -->
+
+    
+
+    
+
+        
+<a id="copilot_posting_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Copilot%20Posting">Copilot Posting
+        
+<a href="http://www.topcoder.com/active-challenges/design/">Design
+        
+
+            <a href="javascript:;">Develop
+
+            
+
+                
+<a id="conceptualization_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Conceptualization">Conceptualization
+                
+<a id="specification_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Specification">Specification
+                
+<a id="architecture_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Architecture">Architecture
+                
+<a id="ui_prototype_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=UI%20Prototype%20Competition">UI Prototype
+                
+<a id="assembly_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Assembly%20Competition">Assembly
+                
+<a id="first2finish_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=First2Finish">First2Finish
+                
+<a id="code_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Code">Code
+                
+<a id="des_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Design">Component Design
+                
+<a id="dev_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Development">Component Development
+                
+<a id="test_suites_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Test%20Suites">Test Suites
+                
+<a id="content_creation_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Content%20Creation">Content Creation
+                
+<a id="test_scenarios_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Test%20Scenarios">Test Scenarios
+                
+<a id="bug_hunt_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Bug%20Hunt">Bug Hunt
+            
+        
+        
+
+            <a href="javascript:;">Review Opportunities
+
+            
+
+                
+
+                    
+
+                        
+Conceptualization
+                        
+<a id="conceptualization_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=23">Review Opportunities
+                        
+<a id="conceptualization_review_border" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=23">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Specification
+                        
+<a id="specification_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=6">Review Opportunities
+                        
+<a id="specification_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=6">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Architecture
+                        
+<a id="architecture_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=7">Review Opportunities
+                        
+<a id="architecture_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=7">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Component Design
+                        
+<a id="des_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=1">Review Opportunities
+                        
+<a id="des_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=1 ">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Component Development
+                        
+<a id="dev_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=2">Review Opportunities
+                        
+<a id="dev_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=2">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Assembly
+                        
+<a id="assembly_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=14">Review Opportunities
+                        
+<a id="assembly_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=14">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+First2Finish
+                        
+<a id="first2finish_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=38">Review Opportunities
+                        
+<a id="first2finish_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=38">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Code
+                        
+<a id="code_review"href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=39">Review Opportunities
+                        
+<a id="code_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=39">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Test Suites
+                        
+<a id="test_suites_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=13">Review Opportunities
+                        
+<a id="test_suites_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=13">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Report
+                        
+<a id="reporting_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=36">Review Opportunities
+                        
+<a id="reporting_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=36">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+UI prototype
+                        
+<a id="ui_prototype_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=19">Review Opportunities
+                        
+<a id="ui_prototype_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=19">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+RIA Build
+                        
+<a id="ria_build_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=24">Review Opportunities
+                        
+<a id="ria_build_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=24">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Content Creation
+                        
+<a id="content_creation_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=35">Review Opportunities
+                        
+<a id="content_creation_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=35">Meet the review board
+                    
+                
+                
+
+                    
+
+                        
+Test Scenarios
+                        
+<a id="test_scenarios_review"  href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=26">Review Opportunities
+                        
+<a id="test_scenarios_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=26">Meet the review board
+                    
+                
+                
+
+                    <dl class="last-item">
+                        
+Bug Hunt
+                        
+<a id="bug_hunt_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=9">Review Opportunities
+                        
+<a id="bug_hunt_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=9">Meet the review board
+                    
+                
+
+            
+        
+        
+
+            <a href="javascript:;">Algorithm (SRM)
+
+            
+
+                
+<a href="http://www.topcoder.com/active-challenges/data/">Single Round Matches (SRM)
+                
+<a id="algo_match_archive" href="http://www.topcoder.com/tc?module=MatchList">Match Archive
+                
+<a id="algo_match_overviews" href="http://www.topcoder.com/stat?c=round_overview">Match Overviews
+                
+<a id="algo_match_winners" href="http://www.topcoder.com/tc?module=SrmDivisionWins">Match Winners
+                
+<a id="algo_match_results" href="http://www.topcoder.com/stat?c=last_match">Match Results
+                
+<a href="http://apps.topcoder.com/wiki/display/tc/Algorithm+Problem+Set+Analysis">Match Editorials
+                
+<a id="algo_problem_archive" href="http://www.topcoder.com/tc?module=ProblemArchive">Problem Archive
+                
+<a id="algo_color_changes" href="http://www.topcoder.com/tc?module=ColorChange&ratid=1">Recent Color Changes
+                
+<a href="http://apps.topcoder.com/wiki/display/tc/Algorithm+Data+Feeds">Data Feeds
+                
+<a href="javascript:arena();">Launch Arena
+            
+        
+        
+
+            <a href="javascript:;">Marathon Match
+
+            
+
+                
+<a id="long_compete" href="http://www.topcoder.com/challenges/data/active/">Challenges
+                
+<a id="long_match_archive" href="http://www.topcoder.com/challenges/data/past/">Match Archive
+                
+<a id="long_match_overview" href="http://www.topcoder.com/longcontest/stats/?module=ViewOverview">Match Overview
+                
+<a id="long_match_winners" href="http://www.topcoder.com/longcontest/stats/?module=MatchWinners">Match Winners
+                
+<a id="long_editorials" href="http://www.topcoder.com/longcontest/?module=Static&d1=match_editorials&d2=archive">Match Editorials
+                
+<a id="long_data_feeds" href="http://www.topcoder.com/longcontest/?module=Static&d1=support&d2=dataFeed">Data Feeds
+                
+<a id="long_practice" href="http://www.topcoder.com/longcontest/?module=ViewPractice">Practice
+                
+<a id="long_queue" href="http://www.topcoder.com/longcontest/?module=ViewQueue">Queue Status
+            
+        
+        
+        
+<a href="http://software.topcoder.com/review">Submit &amp; Review
+        
+
+            <a href="javascript:;">topcoder Networks
+
+            
+
+                
+<a href="http://community.topcoder.com/ntl/">NASA Tournament Lab
+            
+        
+        
+<a href="http://www.topcoder.com/community/events/">Events
+        
+
+            <a href="javascript:;">Statistics
+
+            
+
+                
+
+                    
+
+                        
+Top Ranked
+                        
+<a id="top_rated_algo" href="http://www.topcoder.com/tc?module=AlgoRank">Algorithm
+                        
+<a id="top_rated_hs" href="http://www.topcoder.com/tc?module=HSRank">High School
+                        
+<a id="top_rated_long" href="http://www.topcoder.com/longcontest/stats/?module=CoderRank">Marathon Match
+                        
+<a id="top_rated_conceptors" href="http://www.topcoder.com/stat?c=top_conceptors">Conceptualization
+                        
+<a id="top_rated_specificators" href="http://www.topcoder.com/stat?c=top_specificators">Specification
+                        
+<a id="top_rated_architects" href="http://www.topcoder.com/stat?c=top_architects">Architecture
+                        
+<a id="top_rated_des" href="http://www.topcoder.com/stat?c=top_designers">Design
+                        
+<a id="top_rated_dev" href="http://www.topcoder.com/stat?c=top_developers">Development
+                        
+<a id="top_rated_assemblers" href="http://www.topcoder.com/stat?c=top_assemblers">Assembly
+                        
+<a id="top_rated_testers" href="http://www.topcoder.com/stat?c=top_testers">Test Suites
+                    
+                
+                
+
+                    
+
+                        
+Record Book
+                        
+<a  id="algo_recordbook" href="http://www.topcoder.com/tc?module=Static&d1=statistics&d2=recordbook_home">Algorithm
+                        
+<a  id="comp_recordbook" href="http://www.topcoder.com/tc?module=Static&d1=compstats&d2=comp_recordbook_home">Component
+                        
+<a  id="long_recordbook" href="http://www.topcoder.com/longcontest/?module=Static&d1=stats&d2=recordbook_home">Marathon Match
+                    
+                
+                
+
+                    <dl class="last-item">
+                        
+Coder of the Month
+                        
+<a  id="algo_com" href="http://www.topcoder.com/tc?module=COMHistory&achtid=5">Algorithm
+                        
+<a  id="des_com" href="http://www.topcoder.com/tc?module=COMHistory&achtid=6">Design
+                        
+<a  id="dev_com" href="http://www.topcoder.com/tc?module=COMHistory&achtid=7">Development
+                    
+                
+            
+        
+        
+
+            <a href="javascript:;">Tutorials
+
+            
+
+                
+<a  id="algo_tutorials" href="http://help.topcoder.com/data-science/competing-in-algorithm-challenges/algorithm-tutorials/">Algorithm Tutorials
+                
+<a id="comp_tutorials" href="http://help.topcoder.com/development/competing-in-development-challenges/development-tutorials/ ">Software Tutorials
+                
+<a id="mm_tutorials" href="http://help.topcoder.com/data-science/competing-in-algorithm-challenges/marathon-match-tutorials/">Marathon Tutorials
+            
+        
+        
+<a href="https://apps.topcoder.com/forums/" id="forums">Forums
+        
+<a href="https://www.topcoder.com/tc?module=MyHome" id="my_topcoder">My topcoder
+    
+
+<!-- End .navigation -->
+<section class="member-search">
+    
+Member Search
+    
+
+        <form action="http://community.topcoder.com/tc" method="get" name="simpleSearchForm" class="noSpace" id="simpleSearchForm">
+            <input class="noSpace" type="hidden" name="module" value="SimpleSearch" />
+            <input class="noSpace" type="text" name="ha" value="Handle:" size="12" maxlength="15" onfocus="javascript: if (document.simpleSearchForm.ha.value=='Handle:') document.simpleSearchForm.ha.value = '';" onblur="javascript:if (document.simpleSearchForm.ha.value == '')document.simpleSearchForm.ha.value = 'Handle:';" />
+            <a href="javascript:javascript:void document.simpleSearchForm.submit();" class="btn btn-search-member">
+SEARCH
+        
+    
+
+
+<!-- End .member-search -->
+
+
+
+    
+    
+
+
+
+       </TD>
+       
+<IMG SRC="/i/clear.gif" WIDTH="10" HEIGHT="1" BORDER="0"></TD>
+       <TD CLASS="bodyText" WIDTH="100%" VALIGN="top" class="alignTop" class="alignTop"><IMG SRC="/i/clear.gif" WIDTH="240" HEIGHT="1" VSPACE="5" BORDER="0">
+
+
+         <!-- BEGIN BODY -->
+         <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+           
+
+             
+<IMG WIDTH="11" HEIGHT="26" BORDER="0" SRC="/i/steelblue_top_left1.gif"></TD>
+             
+<IMG WIDTH="180" HEIGHT="26" BORDER="0" SRC="/i/header_statistics.gif"></TD>
+             <TD CLASS="bodyTextBold" VALIGN="middle" WIDTH="100%">
+               
+Problem Statement</SPAN>
+             </TD>
+             
+<IMG SRC="/i/clear.gif" ALT="" WIDTH="10" HEIGHT="26" BORDER="0"></TD>
+           </TR>
+         </TABLE>
+
+
+         <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="10" BGCOLOR="#001B35" WIDTH="100%"  class="paddingTable">
+           
+
+             <TD VALIGN="top" class="alignTop" class="alignTop" WIDTH="100%"><IMG SRC="/i/clear.gif" ALT="" WIDTH="240" HEIGHT="1" BORDER="0">
+
+               <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+                 
+
+                   
+<IMG SRC="/i/clear.gif" ALT="" WIDTH="1" HEIGHT="1" BORDER="0"></TD>
+                 </TR>
+                 
+
+                   
+<IMG SRC="/i/clear.gif" ALT="" WIDTH="1" HEIGHT="5" BORDER="0"></TD>
+                 </TR>
+                 
+
+                   
+                     <TD BACKGROUND="/i/steel_gray_bg.gif" CLASS="statTextBig" COLSPAN="7" HEIGHT="18">Problem Statement for NextNumber</TD>
+                   
+                 </TR>
+                 
+
+                   
+<IMG SRC="/i/clear.gif" ALT="" WIDTH="1" HEIGHT="1" BORDER="0"></TD>
+                 </TR>
+                 
+
+                   
+<IMG SRC="/i/clear.gif" ALT="" WIDTH="1" HEIGHT="1" BORDER="0"></TD>
+                 </TR>
+                 
+
+                   
+
+                      
+              		
+	
+Problem Statement
+		
+The binary weight of a positive integer is the number of 1's in its binary representation. For example, the decimal number 1 has a binary weight of 1, and the decimal number 1717 (which is 11010110101 in binary) has a binary weight of 7.
+
+
+Given a positive integer N, return the smallest integer greater than N that has the same binary weight as N.
+	
+	
+Definition
+		
+	Class:	NextNumber
+	Method:	getNextNumber
+	Parameters:	int
+	Returns:	int
+	Method signature:	int getNextNumber(int N)
+	(be sure your method is public)
+	
+	
+	
+	
+Notes
+	-	The result is guaranteed to fit in a signed 32-bit integer.
+	
+	
+Constraints
+	-	N will be between 1 and 1,000,000,000, inclusive.
+	
+	
+Examples
+	0)	
+		
+	
+	1717
+	Returns: 1718
+	
+	Example from the problem statement.
+	1)	
+		
+	
+	4
+	Returns: 8
+	
+	4 is 100 in its binary representation and weighs 1. The next number is 1000(in binary) which represents 8.
+	2)	
+		
+	
+	7
+	Returns: 11
+	
+	The decimal 7 is binary 111, so it has binary weight of 3. The next number with the same binary weight is 11, which is 1011 in binary.
+	3)	
+		
+	
+	12
+	Returns: 17
+	
+	12 in decimal is 1100 in binary. The next number with the same binary weight is 10001 in binary, which is 17.
+	4)	
+		
+	
+	555555
+	Returns: 555557
+	
+	
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2010, TopCoder, Inc.  All rights reserved.  
