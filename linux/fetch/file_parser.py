@@ -1,5 +1,3 @@
-import re
-
 class Type(object):
   def __eq__(self, other):
     return self.__str__() == other.__str__()
@@ -110,6 +108,7 @@ def parse_type(type_str):
     return StringType()
   if "double" == type_str:
     return DoubleType()
+  print "Unexpected type_str '" + type_str + "'"
   return None
 
 class Param(object):
@@ -158,8 +157,12 @@ class Signature(object):
     return self._params
 
 def parse_signature(signature_str):
-  res = re.search(r"([a-zA-Z<>]*) ([a-zA-Z0-9]*)\((.*)\)", signature_str)
-  [returns_str, method_name, params_str] = res.groups()
+  space_i = signature_str.find(" ")
+  open_paren_i = signature_str.find("(")
+  close_paren_i = signature_str.find(")")
+  returns_str = signature_str[:space_i]
+  method_name = signature_str[space_i + 1:open_paren_i]
+  params_str = signature_str[open_paren_i + 1:close_paren_i]
   return Signature(parse_type(returns_str),
                    method_name,
                    parse_params(params_str))
