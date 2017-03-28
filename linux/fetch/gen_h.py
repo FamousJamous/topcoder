@@ -1,3 +1,4 @@
+import os
 import re
 from create_header_name import create_header_name
 
@@ -16,9 +17,13 @@ def create_signature_str(signature):
 
 def gen_h(path, file_parser):
   class_name = file_parser.class_name()
+  file_path = "{}/{}".format(path, create_header_name(class_name))
+  if os.path.isfile(file_path):
+    print "already generated {}".format(file_path)
+    return
   include_guard = create_include_guard(class_name)
   returns_type = str(file_parser.signature().returns())
-  open("{}/{}".format(path, create_header_name(class_name)), "w").write(
+  open(file_path, "w").write(
     "\n".join([
       "#ifndef {}".format(include_guard),
       "#define {}".format(include_guard),

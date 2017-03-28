@@ -7,16 +7,14 @@ class Type(object):
   def __ne__(self, other):
     return not self.__eq__(other)
 
-  def __str__(self):
-    return "wtf"
+class ValParser(object):
+  def val(self):
+    return self._val
 
-class IntValParser(object):
+class IntValParser(ValParser):
   def parse(self, val_str):
     self._val = int(val_str)
     return True
-
-  def val(self):
-    return self._val
 
 class IntType(Type):
   def __str__(self):
@@ -25,12 +23,93 @@ class IntType(Type):
   def create_val_parser(self):
     return IntValParser()
 
+class LongValParser(ValParser):
+  def parse(self, val_str):
+    self._val = long(val_str)
+    return True
+
+class LongType(Type):
+  def __str__(self):
+    return "long"
+
+  def create_val_parser(self):
+    return LongValParser()
+
+class DoubleValParser(ValParser):
+  def parse(self, val_str):
+    self._val = float(val_str)
+    return True
+
+class DoubleType(Type):
+  def __str__(self):
+    return "double"
+
+  def create_val_parser(self):
+    return DoubleValParser()
+
+class StringValParser(ValParser):
+  def parse(self, val_str):
+    self._val = val_str[1:len(val_str) - 1]
+    return True
+
+class StringType(Type):
+  def __str__(self):
+    return "string"
+
+  def create_val_parser(self):
+    return StringValParser()
+
+VECT_VAL_PARSER_INIT = 0
+VECT_VAL_PARSER_MID = 1
+VECT_VAL_PARSER_DONE = 2
+
+class VectValParser(ValParser):
+  def __init__(self, inner):
+    self._inner = inner
+    self._val = []
+    self._state = VECT_VAL_PARSER_INIT
+
+  def parse(self, val_str):
+    if VECT_VAL_PARSER_INIT == self._state:
+      val_str = val_str[1:]
+      self._state = VECT_VAL_PARSER_MID
+    if VECT_VAL_PARSER_DONE != self._state:
+      if val_str.endswith("}"):
+        self._state = VECT_VAL_PARSER_DONE
+      val_str = val_str[:len(val_str) - 1]
+      self._val += [self._parse_inner(inner_str.strip()) for inner_str in val_str.split(",")]
+    return VECT_VAL_PARSER_DONE == self._state
+
+  def _parse_inner(self, inner_str):
+    inner_parser = self._inner.create_val_parser()
+    # TODO handle vectors of vectors
+    inner_parser.parse(inner_str)
+    return inner_parser.val()
+
+class VectType(Type):
+  def __init__(self, inner):
+    self._inner = inner
+
+  def __str__(self):
+    return "vector<{}>".format(self._inner)
+
+  def create_val_parser(self):
+    return VectValParser(self._inner)
+
 def remove_front(rem, line):
   return line[len(rem):].strip()
 
 def parse_type(type_str):
+  if type_str.endswith("[]"):
+    return VectType(parse_type(type_str[:len(type_str) - len("[]")]))
   if "int" == type_str:
     return IntType()
+  if "long" == type_str:
+    return LongType()
+  if "String" == type_str:
+    return StringType()
+  if "double" == type_str:
+    return DoubleType()
   return None
 
 class Param(object):

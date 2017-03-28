@@ -22,10 +22,24 @@ def append_newlines(lines):
     res.append("{}\n".format(line))
   return res
 
+def expect_file_v1(file_name, exp_file_name):
+  exp_lines = open(exp_file_name).readlines()
+  res_lines = open(file_name).readlines()
+  line_num = 0
+  for res, exp in itertools.izip(res_lines, exp_lines):
+    if res != exp:
+      print "unexpected contents for {}.".format(file_name)
+      print "expected lines:"
+      print_with_line_marked(exp_lines, line_num)
+      print "actual lines:"
+      print_with_line_marked(res_lines, line_num)
+      break
+    line_num += 1
+
 def expect_file(file_name, exp_lines):
   exp_lines = append_newlines(exp_lines)
-  line_num = 0
   res_lines = open(file_name).readlines()
+  line_num = 0
   for res, exp in itertools.izip(res_lines, exp_lines):
     if res != exp:
       print "unexpected contents for {}.".format(file_name)

@@ -15,9 +15,6 @@ def main():
   srm_num = float(sys.argv[1])
   dest_dir = sys.argv[3]
   srm_dir = "%s/srm%d" %(dest_dir, srm_num)
-  if os.path.isdir(srm_dir):
-    print "srm%d already generated" %(srm_num)
-    return
   data_dir = sys.argv[2]
   srm_url = get_srm_url(srm_num, data_dir)
   print "srm%d %s" %(srm_num, srm_url)

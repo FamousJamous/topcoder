@@ -1,5 +1,4 @@
 import itertools
-import os
 from create_header_name import create_header_name
 from file_parser import FileParser
 from gen_h import gen_h
@@ -81,9 +80,6 @@ def gen_cpp(path, file_parser):
   ]))
 
 def gen_problem(path, formatted_file_name):
-  if os.path.isfile(path + "/test.sh"):
-    print "already generated " + path
-    return 1
   gen_shs(path)
   file_parser = FileParser(formatted_file_name)
   gen_h(path, file_parser)
