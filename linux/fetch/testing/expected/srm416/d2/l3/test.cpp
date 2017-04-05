@@ -1,8 +1,12 @@
 #include "dancing_couples.h"
-#include <assert.h>
+#include <cassert>
 #include <iostream>
 #include <string>
 #include <vector>
+
+namespace {
+
+using namespace std;
 
 void test(vector<string> canDance, int K, int exp) {
   int res = DancingCouples().countPairs(canDance, K);
@@ -11,6 +15,8 @@ void test(vector<string> canDance, int K, int exp) {
     assert(0);
   }
 }
+
+} // namespace
 
 int main() {
   vector<string> canDance0 = {"YYYY", "YYYY", "YYYY"};

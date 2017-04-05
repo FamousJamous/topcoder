@@ -5,8 +5,8 @@ class Type(object):
   def __ne__(self, other):
     return not self.__eq__(other)
 
-  def get_lib(self):
-    return None
+  def get_libs(self):
+    return []
 
 class ValParser(object):
   def val_str(self):
@@ -53,6 +53,9 @@ class StringValParser(ValParser):
     self._val = val_str[1:len(val_str) - 1]
     return True
 
+  def val_str(self):
+    return "\"{}\"".format(self._val)
+
 class StringType(Type):
   def __str__(self):
     return "string"
@@ -60,8 +63,8 @@ class StringType(Type):
   def create_val_parser(self):
     return StringValParser()
 
-  def get_lib(self):
-    return "string"
+  def get_libs(self):
+    return ["string"]
 
 VECT_VAL_PARSER_INIT = 0
 VECT_VAL_PARSER_MID = 1
@@ -92,7 +95,7 @@ class VectValParser(ValParser):
     return inner_parser.val_str()
 
   def val_str(self):
-    return "{{ {} }}".format(", ".join(self._val))
+    return "{{{}}}".format(", ".join(self._val))
 
 class VectType(Type):
   def __init__(self, inner):
@@ -104,8 +107,8 @@ class VectType(Type):
   def create_val_parser(self):
     return VectValParser(self._inner)
 
-  def get_lib(self):
-    return "vector"
+  def get_libs(self):
+    return ["vector"] + self._inner.get_libs()
 
 def remove_front(rem, line):
   return line[len(rem):].strip()

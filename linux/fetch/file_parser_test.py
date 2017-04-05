@@ -7,11 +7,11 @@ def srm416_d1_l1():
   expect_eq(Signature(IntType(), "getNextNumber", [Param("N", IntType())]),
             file_parser.signature())
   expect_eq([
-    Example(0, [1717], 1718),
-    Example(1, [4], 8),
-    Example(2, [7], 11),
-    Example(3, [12], 17),
-    Example(4, [555555], 555557)],
+    Example(0, ["1717"], "1718"),
+    Example(1, ["4"], "8"),
+    Example(2, ["7"], "11"),
+    Example(3, ["12"], "17"),
+    Example(4, ["555555"], "555557")],
     file_parser.examples())
 
 def srm416_d2_l3():
@@ -21,10 +21,10 @@ def srm416_d2_l3():
                                                 Param("K", IntType())]),
             file_parser.signature())
   expect_eq([
-    Example(0, [["YYYY", "YYYY", "YYYY"], 3], 24),
-    Example(1, [["YYNN", "NYYN", "NNYY"], 3], 4),
-    Example(2, [["YY", "YY", "YY"], 3], 0),
-    Example(3, [["YYNNNN", "NYYNNN", "NNYYNN", "NNNYYN", "NNNNYY", "YNNNNY"], 3], 112)],
+    Example(0, ["{\"YYYY\", \"YYYY\", \"YYYY\"}", "3"], "24"),
+    Example(1, ["{\"YYNN\", \"NYYN\", \"NNYY\"}", "3"], "4"),
+    Example(2, ["{\"YY\", \"YY\", \"YY\"}", "3"], "0"),
+    Example(3, ["{\"YYNNNN\", \"NYYNNN\", \"NNYYNN\", \"NNNYYN\", \"NNNNYY\", \"YNNNNY\"}", "3"], "112")],
     file_parser.examples())
 
 if "__main__" == __name__:

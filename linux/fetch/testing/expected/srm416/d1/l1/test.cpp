@@ -1,6 +1,10 @@
 #include "next_number.h"
-#include <assert.h>
-#include <iostream.h>
+#include <cassert>
+#include <iostream>
+
+namespace {
+
+using namespace std;
 
 void test(int N, int exp) {
   int res = NextNumber().getNextNumber(N);
@@ -9,6 +13,8 @@ void test(int N, int exp) {
     assert(0);
   }
 }
+
+} // namespace
 
 int main() {
   int N0 = 1717;

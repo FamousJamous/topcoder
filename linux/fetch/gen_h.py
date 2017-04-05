@@ -1,6 +1,7 @@
 import os
 import re
 from create_header_name import create_header_name
+from create_include_strs import create_include_strs
 
 def create_include_guard(class_name):
  temp = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', class_name)
@@ -10,6 +11,7 @@ def create_params_str(params):
   return ", ".join(["{} {}".format(param.type_(),
                                    param.name()) for param in params])
 
+'''
 def create_include_strs(signature):
   libs = ["iostream"]
   if signature.returns().get_lib():
@@ -17,6 +19,7 @@ def create_include_strs(signature):
   libs += [param.type_().get_lib() for param in signature.params() if param.type_().get_lib()]
   libs.sort()
   return "\n".join(["#include <{}>".format(lib) for lib in libs])
+'''
 
 def create_signature_str(signature):
   return "{} {}({})".format(signature.returns(),
@@ -37,13 +40,13 @@ def gen_h(path, file_parser):
       "#ifndef {}".format(include_guard),
       "#define {}".format(include_guard),
       "",
-      "{}".format(create_include_strs(signature)),
+      create_include_strs(signature, ["iostream"]),
       "",
       "namespace {",
       "",
       "using namespace std;",
       "",
-      "} //namespace",
+      "} // namespace",
       "",
       "struct {} {{".format(class_name),
       "",
