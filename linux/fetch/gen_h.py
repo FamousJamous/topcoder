@@ -10,6 +10,14 @@ def create_params_str(params):
   return ", ".join(["{} {}".format(param.type_(),
                                    param.name()) for param in params])
 
+def create_include_strs(signature):
+  libs = ["iostream"]
+  if signature.returns().get_lib():
+    libs.append(signature.returns().get_lib())
+  libs += [param.type_().get_lib() for param in signature.params() if param.type_().get_lib()]
+  libs.sort()
+  return "\n".join(["#include <{}>".format(lib) for lib in libs])
+
 def create_signature_str(signature):
   return "{} {}({})".format(signature.returns(),
                             signature.method_name(),
@@ -22,15 +30,24 @@ def gen_h(path, file_parser):
     print "already generated {}".format(file_path)
     return
   include_guard = create_include_guard(class_name)
-  returns_type = str(file_parser.signature().returns())
+  signature = file_parser.signature()
+  returns_type = str(signature.returns())
   open(file_path, "w").write(
     "\n".join([
       "#ifndef {}".format(include_guard),
       "#define {}".format(include_guard),
       "",
+      "{}".format(create_include_strs(signature)),
+      "",
+      "namespace {",
+      "",
+      "using namespace std;",
+      "",
+      "} //namespace",
+      "",
       "struct {} {{".format(class_name),
       "",
-      "{} {{".format(create_signature_str(file_parser.signature())),
+      "{} {{".format(create_signature_str(signature)),
       "  return {}();".format(returns_type),
       "}",
       "",

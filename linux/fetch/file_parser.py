@@ -5,9 +5,12 @@ class Type(object):
   def __ne__(self, other):
     return not self.__eq__(other)
 
+  def get_lib(self):
+    return None
+
 class ValParser(object):
-  def val(self):
-    return self._val
+  def val_str(self):
+    return str(self._val)
 
 class IntValParser(ValParser):
   def parse(self, val_str):
@@ -57,6 +60,9 @@ class StringType(Type):
   def create_val_parser(self):
     return StringValParser()
 
+  def get_lib(self):
+    return "string"
+
 VECT_VAL_PARSER_INIT = 0
 VECT_VAL_PARSER_MID = 1
 VECT_VAL_PARSER_DONE = 2
@@ -75,14 +81,18 @@ class VectValParser(ValParser):
       if val_str.endswith("}"):
         self._state = VECT_VAL_PARSER_DONE
       val_str = val_str[:len(val_str) - 1]
-      self._val += [self._parse_inner(inner_str.strip()) for inner_str in val_str.split(",")]
+      inner_list = [inner_str.strip() for inner_str in val_str.split(",") if inner_str.strip()]
+      if inner_list:
+        self._val += [self._parse_inner(inner_str.strip()) for inner_str in inner_list]
     return VECT_VAL_PARSER_DONE == self._state
 
   def _parse_inner(self, inner_str):
     inner_parser = self._inner.create_val_parser()
-    # TODO handle vectors of vectors
     inner_parser.parse(inner_str)
-    return inner_parser.val()
+    return inner_parser.val_str()
+
+  def val_str(self):
+    return "{{ {} }}".format(", ".join(self._val))
 
 class VectType(Type):
   def __init__(self, inner):
@@ -93,6 +103,9 @@ class VectType(Type):
 
   def create_val_parser(self):
     return VectValParser(self._inner)
+
+  def get_lib(self):
+    return "vector"
 
 def remove_front(rem, line):
   return line[len(rem):].strip()
@@ -168,29 +181,29 @@ def parse_signature(signature_str):
                    parse_params(params_str))
 
 class Example(object):
-  def __init__(self, num, param_vals, returns_val):
+  def __init__(self, num, param_val_strs, returns_val_str):
     self._num = num
-    self._param_vals = param_vals
-    self._returns_val = returns_val
+    self._param_val_strs = param_val_strs
+    self._returns_val_str = returns_val_str
 
   def __eq__(self, other):
-    return self.num() == other.num() and self.param_vals() == other.param_vals() and self.returns_val() == other.returns_val()
+    return self.num() == other.num() and self.param_val_strs() == other.param_val_strs() and self.returns_val_str() == other.returns_val_str()
 
   def __ne__(self, other):
     return not self.__eq__(other)
 
   def __str__(self):
-    return "num: {}, param_vals: {}, returns_val: {}".format(
-      self.num(), self.param_vals(), self.returns_val())
+    return "num: {}, param_val_strs: {}, returns_val_str: {}".format(
+      self.num(), self.param_val_strs(), self.returns_val_str())
 
   def num(self):
     return self._num
 
-  def param_vals(self):
-    return self._param_vals
+  def param_val_strs(self):
+    return self._param_val_strs
 
-  def returns_val(self):
-    return self._returns_val
+  def returns_val_str(self):
+    return self._returns_val_str
 
 EX_PARSER_NUM = 0
 EX_PARSER_PARAM_VALS = 1
@@ -204,7 +217,7 @@ class ExampleParser(object):
     self._params = params
     self._params_i = 0
     self._val_parser = params[0].type_().create_val_parser()
-    self._param_vals = []
+    self._param_val_strs = []
     self._state = EX_PARSER_NUM
 
   def parse(self, line):
@@ -224,7 +237,7 @@ class ExampleParser(object):
   def _parse_param_vals(self, line):
     if not self._val_parser.parse(line):
       return
-    self._param_vals.append(self._val_parser.val())
+    self._param_val_strs.append(self._val_parser.val_str())
     self._params_i += 1
     if len(self._params) == self._params_i:
       self._state = EX_PARSER_RETURNS_VAL
@@ -237,7 +250,7 @@ class ExampleParser(object):
       line = remove_front("Returns:", line)
     if not self._val_parser.parse(line):
       return
-    self._example = Example(self._num, self._param_vals, self._val_parser.val())
+    self._example = Example(self._num, self._param_val_strs, self._val_parser.val_str())
     self._state = EX_PARSER_DONE
 
   def example(self):

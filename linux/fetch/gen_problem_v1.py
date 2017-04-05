@@ -38,13 +38,13 @@ def create_test_case_params_str(params, example):
                              param.name(),
                              num,
                              val) for param, val in itertools.izip(params,
-                                                                   example.param_vals())
+                                                                   example.param_val_strs())
   ])
 
 def create_test_case_returns_str(returns, example):
   return "  {} exp{} = {};".format(returns,
                                    example.num(),
-                                   example.returns_val())
+                                   example.returns_val_str())
 
 def create_test_case_call_str(signature, num):
   return "  test({}, exp{});".format(
@@ -66,10 +66,16 @@ def gen_cpp(path, file_parser):
   open("{}/test.cpp".format(path), "w").write(
   "\n".join([
     "#include \"{}\"".format(create_header_name(file_parser.class_name())),
-    "#include <assert.h>",
-    "#include <iostream.h>",
+    "#include <cassert>",
+    "#include <iostream>",
+    "",
+    "namespace {",
+    "",
+    "using namespace std;",
     "",
     create_test_func_str(file_parser),
+    "",
+    "} // namespace",
     "",
     "int main() {",
     create_test_cases_str(file_parser),
